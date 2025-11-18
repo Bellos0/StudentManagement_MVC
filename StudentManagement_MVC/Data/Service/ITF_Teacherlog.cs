@@ -7,5 +7,8 @@ namespace StudentManagement_MVC.Data.Service
     {
         Task AddTeacher(Teacherlog teacherlog);
         Task<Teacherlog?> DeleteTeacher(int id);
+
+        Task<Teacherlog?> GetTeacherByUname(string uname);
+        Task<IEnumerable<Teacherlog>> getAllTeacherlog();
     }
 }

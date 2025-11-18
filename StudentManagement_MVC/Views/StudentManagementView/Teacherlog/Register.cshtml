@@ -1,0 +1,36 @@
+﻿@model  StudentManagement_MVC.Models.StuddentManagement_database.Teacherlog;
+
+<div class="container">
+    <h2> Register Page</h2>
+
+    <form asp-action="Register" method="post">
+
+        <div>
+            <label  asp-for="Uname  " class="form-label">Teacher Name</label>
+            <input asp-for="Uname" class="form-control" />
+        </div>
+
+        <div>
+            <label asp-for="Pass" class="form-label">Password</label>
+            <input asp-for="Pass" class="form-control" />
+            <span asp-validation-for="Pass" class="text-danger"></span>
+        </div>
+
+        
+
+        <div>
+            <label asp-for="Email" class="form-label">Email</label>
+            <input asp-for="Email" class="form-control" />
+        </div>
+
+        <div>
+            <label asp-for="Phone" class="form-label">Phone</label>
+            <input asp-for="Phone" class="form-control" />
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Register</button>
+        
+        <button type="button" class="btn btn-primary" >Cancel</button>
+    </form>
+</div>
