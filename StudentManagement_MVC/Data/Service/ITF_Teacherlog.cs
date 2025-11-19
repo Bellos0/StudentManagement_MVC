@@ -9,6 +9,7 @@ namespace StudentManagement_MVC.Data.Service
         Task<Teacherlog?> DeleteTeacher(int id);
 
         Task<Teacherlog?> GetTeacherByUname(string uname);
+        Task UpdateTeacherInfo(Teacherlog model);
         Task<IEnumerable<Teacherlog>> getAllTeacherlog();
     }
 }

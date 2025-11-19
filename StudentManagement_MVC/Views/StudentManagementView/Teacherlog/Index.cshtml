@@ -1,5 +1,33 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model IEnumerable<StudentManagement_MVC.Models.StuddentManagement_database.Teacherlog>
+
+
+<div>
+    <h2>List Teacher User</h2>
+    
+        <table>
+            <thead>
+                <tr>
+                    <th>Teacher Log Name</th>
+                    <th > Password</th>
+                    <th> Email</th>
+                    <th>Phone</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                    {
+                        <tr>
+                        <td>@item.Uname</td>
+                        <td>@item.Pass</td>
+                        <td>@item.Email</td>
+                        <td>@item.Phone</td>
+                    </tr>
+                    }
+            </tbody>
+        </table>
+
+
+
+
+    
+</div>

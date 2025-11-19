@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 using StudentManagement_MVC.Models.StuddentManagement_database;
 
 namespace StudentManagement_MVC.Data.Service
@@ -32,7 +33,6 @@ namespace StudentManagement_MVC.Data.Service
         {
             var teacherlist = await _context.Teacherlogs.ToListAsync();
             return teacherlist;
-            //throw new NotImplementedException();
         }
 
 
@@ -47,10 +47,24 @@ namespace StudentManagement_MVC.Data.Service
         public async Task<Teacherlog?> GetTeacherByUname(string uname)
         {
             //throw new NotImplementedException();
-            var username =
-           await _context.Teacherlogs.FirstOrDefaultAsync(x => x.Uname == uname);
+            return await _context.Teacherlogs.FirstOrDefaultAsync(t => t.Uname == uname);
 
-            return username;
+        }
+
+        public async Task UpdateTeacherInfo(Teacherlog model)
+        {
+            //throw new NotImplementedException();
+            var newTeacher = await _context.Teacherlogs.FirstOrDefaultAsync(t => t.Uname == model.Uname);
+            if (newTeacher != null)
+            {
+                newTeacher.Uname = model.Uname;
+                newTeacher.Pass = model.Pass;
+                newTeacher.Email = model.Email;
+                newTeacher.Phone = model.Phone;
+                await _context.SaveChangesAsync();
+            }
+            
+
         }
     }
 }

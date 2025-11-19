@@ -1,0 +1,46 @@
+﻿@model StudentManagement_MVC.Models.StuddentManagement_database.Teacherlog;
+
+<div>
+    <h2> Edit Teacher Infor</h2>
+    <form asp-action="FindTeacherByUname" method="get">
+        <div>
+            <label for="txtUname">Enter Uname</label>
+            <input id="txtUname" type="text" name="Uname" />
+            <button type="submit">Search</button>
+
+        </div>
+    </form>
+    @if (ViewBag.Error != null)
+    {
+        <p style="color:red ">@ViewBag.Error</p>
+    }
+    @if (Model != null) // khac null thi moi hien thi phan trong {}
+    {
+        <form asp-action="UpdateTeacherInfo" method="post">
+            <div>
+                <label asp-for="Uname">Teacher Log Name</label>
+                <input asp-for="Uname" type="text" />
+            </div>
+
+            <div>
+                <label asp-for="Pass">Password</label>
+                <input asp-for="Pass" type="text" />
+
+            </div>
+
+            <div>
+                <label asp-for="Email">Email</label>
+                <input asp-for="Email" type="text" />
+            </div>
+
+            <div>
+                <label asp-for="Phone">Phone</label>
+                <input asp-for="Phone" />
+            </div>
+
+            <button type="submit">Update Info</button>
+
+            <a href="@Url.Action("Index")">Cancel</a>
+        </form>
+    }
+</div>
