@@ -43,7 +43,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Teacherlog}/{action=Register}/{id?}")
+    pattern: "{controller=Teacherlog}/{action=FindTeacherByUname}/{id?}")
     .WithStaticAssets();
 
 
