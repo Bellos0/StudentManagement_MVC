@@ -3,5 +3,16 @@
 
 <div>
     <h2> Login Panel</h2>
-    <form action="/" method="post"></form>
+    <form asp-action="Login" method="post" class="form-control">
+        <div>
+            <label for="txtUname" class="form-label">User Name</label>
+            <input id="txtUname" type="text" name="Uname" class="form-control" />
+        </div>
+        <div>
+            <label for="txtPass">Password</label>
+            <input id="txtPass" type="password" name="Pass" class="form-control" />
+        </div>
+        <input id="btnLog" type="submit" value="Log In" class="btn btn-primary" />
+       <a href="/Teacherlog/Login" class="btn btn-primary btn-danger">Cancel</a>
+    </form>
 </div>

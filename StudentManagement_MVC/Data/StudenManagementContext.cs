@@ -24,10 +24,26 @@ public partial class StudenManagementContext : DbContext
 
     public virtual DbSet<Teacherlog> Teacherlogs { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-G1I4OFP\\SQLEXPRESS;Initial Catalog=StudentManagerment;Integrated Security=True;Trust Server Certificate=True");
 
+    /// <summary>
+    /// sửa lại cái này để giấu cái connectionstring đi.
+    /// không thể xóa được vì nó được tạo sinh bởi scaffold-dbcontext, re-write lại nó cho gọn gàng thôi.
+    /// </summary>
+    /// <param name="optionsBuilder"></param>
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseSqlServer("Name=ConnectionString:DefCon");
+        }
+
+        #region warning tao boi scallfold-dbcontext
+        //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+
+
+        // => optionsBuilder.UseSqlServer("Data Source=DESKTOP-G1I4OFP\\SQLEXPRESS;Initial Catalog=StudentManagerment;Integrated Security=True;Trust Server Certificate=True");
+        #endregion
+    }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Score>(entity =>

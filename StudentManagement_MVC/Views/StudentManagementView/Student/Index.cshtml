@@ -1,0 +1,30 @@
+﻿@model IEnumerable<StudentManagement_MVC.Models.StuddentManagement_database.Student>;
+
+<div>
+    <h1> Student list </h1>
+</div>
+<div class="table-primary">
+    <table>
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Student Name</th>
+                <th>Class</th>
+                <th>Address</th>
+                <th>Parrent Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.StuId</td>
+                    <td>@item.Fullname</td>
+                    <td>@item.Class</td>
+                    <td>@item.Address</td>
+                    <td>@item.ParentPhone</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

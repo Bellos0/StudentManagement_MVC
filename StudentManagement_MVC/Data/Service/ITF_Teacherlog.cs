@@ -6,7 +6,7 @@ namespace StudentManagement_MVC.Data.Service
 
     {
         Task AddTeacher(Teacherlog teacherlog);
-        Task<Teacherlog?> DeleteTeacher(int id);
+        Task DeleteTeacher(Teacherlog teacherlog);
 
         Task<Teacherlog?> GetTeacherByUname(string uname);
         Task UpdateTeacherInfo(Teacherlog model);

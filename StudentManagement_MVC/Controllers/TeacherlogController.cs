@@ -19,6 +19,12 @@ namespace StudentManagement_MVC.Controllers
             _Teacherlog = Teacherlog;
         }
 
+
+
+        /// <summary>
+        /// hien thi danh sach teacher user
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Index()
         {
             var teacherUserlist = await _Teacherlog.getAllTeacherlog();
@@ -26,6 +32,40 @@ namespace StudentManagement_MVC.Controllers
 
         }
 
+
+        public async Task<IActionResult> Login(string? Uname, string? Pass)
+        {
+            if (string.IsNullOrEmpty(Uname) || string.IsNullOrEmpty(Pass))
+            {
+                return View("~/Views/StudentManagementView/Teacherlog/Login.cshtml");
+            }
+
+            var teacher = await _Teacherlog.GetTeacherByUname(Uname);
+            if (teacher != null)
+            {
+                if (teacher.Pass == Pass)
+                {
+                    TempData["Message"] = "Login successful";
+                    // i wanna save session here, i dont see session belongs to system.web here
+                    HttpContext.Session.SetString("username",Uname);
+                    return RedirectToAction("Index");
+                }
+
+            }
+            else
+            {
+                TempData["Message"] = "Login failed";
+            }
+            return View("~/Views/StudentManagementView/Teacherlog/Login.cshtml");
+        }
+
+
+
+
+        /// <summary>
+        /// HIen thi trang Register
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Register()
         {
             return View("~/Views/StudentManagementView/Teacherlog/Register.cshtml");
@@ -52,7 +92,11 @@ namespace StudentManagement_MVC.Controllers
             }
         }
 
-        
+        /// <summary>
+        /// input username de tim ra thong tin cua user
+        /// </summary>
+        /// <param name="Uname"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> FindTeacherByUname(string? Uname)
         {
@@ -64,7 +108,7 @@ namespace StudentManagement_MVC.Controllers
             if (teacher == null)
             {
                 ViewBag.Error = "teacher not found";
-                return View("~/Views/StudentManagementView/Teacherlog/EditTeacherInfo.cshtml",null);
+                return View("~/Views/StudentManagementView/Teacherlog/EditTeacherInfo.cshtml", null);
             }
             else
             {
@@ -72,12 +116,22 @@ namespace StudentManagement_MVC.Controllers
             }
         }
 
+
+
+        /// <summary>
+        /// sua doi thong tin user
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult> UpdateTeacherInfo(Teacherlog model)
         {
             await _Teacherlog.UpdateTeacherInfo(model);
             return RedirectToAction("Index");
         }
+
+
+
 
     }
 }

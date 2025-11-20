@@ -23,10 +23,14 @@ namespace StudentManagement_MVC.Data.Service
             //throw new NotImplementedException();
         }
 
-        public Task<Teacherlog?> DeleteTeacher(int id)
+        public async Task DeleteTeacher(Teacherlog teacherlog)
         {
-            throw new NotImplementedException();
-            //_context.Teacherlogs.ExecuteDeleteAsync<Teacherlog>()
+            var teacherInDB = await _context.Teacherlogs.FirstOrDefaultAsync(t=>t.Uname == teacherlog.Uname);
+            if(teacherInDB != null)
+            {
+                _context.Teacherlogs.Remove(teacherInDB);
+                await _context.SaveChangesAsync();
+            }
         }
 
         public async Task<IEnumerable<Teacherlog>> getAllTeacherlog()
@@ -51,7 +55,7 @@ namespace StudentManagement_MVC.Data.Service
 
         }
 
-        public async Task UpdateTeacherInfo(Teacherlog model)
+        public async Task UpdateTeacherInfo(Teacherlog model=null!)
         {
             //throw new NotImplementedException();
             var newTeacher = await _context.Teacherlogs.FirstOrDefaultAsync(t => t.Uname == model.Uname);
@@ -60,11 +64,12 @@ namespace StudentManagement_MVC.Data.Service
                 newTeacher.Uname = model.Uname;
                 newTeacher.Pass = model.Pass;
                 newTeacher.Email = model.Email;
-                newTeacher.Phone = model.Phone;
+                newTeacher.Phone = model.Phone.Trim();
                 await _context.SaveChangesAsync();
             }
             
 
         }
+
     }
 }

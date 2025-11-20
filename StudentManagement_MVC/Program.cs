@@ -4,6 +4,12 @@ using StudentManagement_MVC.Data.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//-----enable session here----------------
+// 2line below enable seesion in ASP.NET Core
+builder.Services.AddDistributedMemoryCache(); // yeu cau de luu session trong bo nho
+builder.Services.AddSession(); // dang ky session o phan trung gian
+//---------------------------------------------
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -40,10 +46,11 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapStaticAssets();
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Teacherlog}/{action=FindTeacherByUname}/{id?}")
+    pattern: "{controller=Student}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 

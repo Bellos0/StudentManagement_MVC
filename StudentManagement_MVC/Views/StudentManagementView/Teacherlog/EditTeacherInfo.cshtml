@@ -4,7 +4,7 @@
     <h2> Edit Teacher Infor</h2>
     <form asp-action="FindTeacherByUname" method="get">
         <div>
-            <label for="txtUname">Enter Uname</label>
+            <label @* for="txtUname" *@>Enter Uname</label> @* doan for="" o kia co hay k cung k quan trong chi la mot dang attribute de dang ket noi giua label va input unit ben duoi, con thuc te label cua minh muc dich la hien thi thoi, cha co tac dung gi hon *@
             <input id="txtUname" type="text" name="Uname" />
             <button type="submit">Search</button>
 
@@ -40,7 +40,7 @@
 
             <button type="submit">Update Info</button>
 
-            <a href="@Url.Action("Index")">Cancel</a>
+            <a href="@Url.Action("Index")" class="btn btn-primary btn-danger">Cancel</a>
         </form>
     }
 </div>

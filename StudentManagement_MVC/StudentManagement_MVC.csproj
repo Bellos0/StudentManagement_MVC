@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <Folder Include="Views\StudentManagementView\Subject\" />
-    <Folder Include="Views\StudentManagementView\Student\" />
     <Folder Include="Views\StudentManagementView\Score\" />
   </ItemGroup>
 
