@@ -4,24 +4,53 @@ namespace StudentManagement_MVC.Data.Service
 {
     public class SubjectService : ITF_Subject
     {
-        public Task AddSubject(Subject subject)
+        private readonly StudenManagementContext _context;
+        public SubjectService(StudenManagementContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task DeleteSubject(Subject subject)
+
+        public async Task AddSubject(Subject subject)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            if(subject != null)
+            {
+                await _context.Subjects.Add(subject)    ;
+                await _context.SaveChangesAsync();
+
+            }
+
         }
 
-        public Task<IEnumerable<Subject>> GetAllSubject()
+        
+        public async Task DeleteSubject(string? subID)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            var subjectInDb = await _context.Subjects.firstOrDefaultAsync(s => s.SubId == subID);
+            if (subjectInDb !=null)
+            {
+                _context.Subjects.remove(subjectInDb);
+                await _context.SaveChangesAsync();
+            }
         }
 
-        public Task ModifySubject(Subject subject)
+        public async Task<IEnumerable<Subject>> GetAllSubject()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            var subjectList= await _context.Subjects.ToListAsync();
+            return subjectList;
         }
+
+        public async Task ModifySubject(Subject subject)
+        {
+            //throw new NotImplementedException();
+            var subjectInDb = await _context.Subjects.FirstOrDefaultAsync(s => s.SubId == subject.SubId);
+            if (subjectInDb != null)
+            {
+                subjectInDb.Subname = subject.Subname;
+                
+                await _context.SaveChangesAsync();
+            }
     }
 }

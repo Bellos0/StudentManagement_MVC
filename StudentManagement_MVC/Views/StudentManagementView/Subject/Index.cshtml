@@ -1,0 +1,36 @@
+﻿@model IEnumerable<StudentManagement_MVC.Models.StuddentManagement_database.Subject>;
+@model studentManagement_MVC.Models.StuddentManagement_database.Subject;
+@* tao luon action xoa subject tai form index nay luon  *@
+
+<div>
+    <h1> Subject List</h1>
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th> Subject ID</th>
+                    <th>Subject Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.SubId</td>
+                        <td>@item.Subname</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div>
+    <form asp-action="" method="post">
+        <label > Subject ID</label>
+        <input asp-for="SubId" type="text" />
+        <button type="submit">Deleted Subject</button>
+
+    </form>
+</div>

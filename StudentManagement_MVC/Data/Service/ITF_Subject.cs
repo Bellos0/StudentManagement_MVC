@@ -6,7 +6,7 @@ namespace StudentManagement_MVC.Data.Service
     public interface ITF_Subject
     {
         Task<IEnumerable<Subject>> GetAllSubject();
-        Task DeleteSubject(Subject subject);
+        Task DeleteSubject(string? subID);
         Task AddSubject(Subject subject);
         Task ModifySubject(Subject subject);
     }

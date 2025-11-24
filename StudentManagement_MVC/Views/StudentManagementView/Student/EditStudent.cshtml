@@ -1,5 +1,49 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model sstudentManagement_MVC.Models.Student;
+
+<div>
+    <h1> Modified Student Information </h1>
+    <form asp-action="SearchStudentByID" method="get">
+        <div>
+            <label>Input Id </label>
+            <input type="text" for="StuID" />
+            <button type="submit">Search</button>
+        </div>
+    </form>
+
+    @if (model != null)
+    {
+        <form asp-action="EditInfo" method="post">
+            <div>
+                <label for="StuId" class="form-label">Student ID</label>
+                <input asp-for="StuId" type="text" class="form-control" readonly />
+                <button type="button" class="btn btn-secondary" asp-action="GenStuID">Generate ID</button>
+            </div>
+            <div>
+                <label for="Fullname" class="form-label">Full Name</label>
+                <input asp-for="Fullname" type="text" class="form-control" required />
+            </div>
+            <div>
+                <label for="DoB" class="form-label">Date of Birth</label>
+                <input asp-for="DoB" type="text" class="form-control" required />
+            </div>
+            <div>
+                <label for="Sex" class="form-label">Sex</label>
+                <input asp-for="Sex" type="text" class="form-control" />
+            </div>
+            <div>
+                <label for="Class" class="form-label">Class</label>
+                <input asp-for="Class" type="text" class="form-control" />
+            </div>
+            <div>
+                <label for="Address" class="form-label">Address</label>
+                <input asp-for="Address" type="text" class="form-control" />
+            </div>
+            <div>
+                <label for="ParentPhone" class="form-label">ParentPhone</label>
+                <input asp-for="ParentPhone" type="text" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-primary">Update Student</button>
+            <a type="button" class="btn btn-danger" href="@Url.Action("Index")">Cancel</a>
+        </form>
+    }
+</div>
