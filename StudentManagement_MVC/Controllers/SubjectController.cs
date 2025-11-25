@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StudentManagement_MVC.Data.Service;
+using StudentManagement_MVC.Models.StuddentManagement_database;
+using System.Threading.Tasks;
 
 namespace StudentManagement_MVC.Controllers
 {
@@ -10,12 +12,33 @@ namespace StudentManagement_MVC.Controllers
         {
             _subjectService = subjectService;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View("~/Views/StudentManagementView/Subject/Index.cshtml");
+            var subjectlist = await _subjectService.GetAllSubject();
+            return View("~/Views/StudentManagementView/Subject/Index.cshtml", subjectlist);
         }
 
         [HttpPost]
+        public async Task<IActionResult> DelSubByID(string SubID)
+        {
+            await _subjectService.DeleteSubject(SubID);
+            return RedirectToAction("Index");
 
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> AddSub(Subject? subject)
+        {
+            if (subject == null)
+            {
+                return View("~/Views/StudentManagementView/Subject/AddSubject.cshtml", null);
+            }
+            else
+            {
+                await _subjectService.AddSubject(subject);
+                return RedirectToAction("Index");
+            }
+        }
     }
 }

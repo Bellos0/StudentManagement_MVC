@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<StudentManagement_MVC.Models.StuddentManagement_database.Subject>;
-@model studentManagement_MVC.Models.StuddentManagement_database.Subject;
+@* @model StudentManagement_MVC.Models.StuddentManagement_database.Subject; *@
 @* tao luon action xoa subject tai form index nay luon  *@
 
 <div>
@@ -19,6 +19,12 @@
                     <tr>
                         <td>@item.SubId</td>
                         <td>@item.Subname</td>
+                        <td>
+                            <form action="DelSubByID" method="post">
+                                <input type="hidden" value="@item.SubId" name="SubId"/>"
+                                <button type="submit">Deleted Subject by ID</button>
+                            </form>
+                        </td>
                     </tr>
                 }
             </tbody>
@@ -26,11 +32,3 @@
     </div>
 </div>
 
-<div>
-    <form asp-action="" method="post">
-        <label > Subject ID</label>
-        <input asp-for="SubId" type="text" />
-        <button type="submit">Deleted Subject</button>
-
-    </form>
-</div>

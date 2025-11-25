@@ -1,4 +1,5 @@
-﻿using StudentManagement_MVC.Models.StuddentManagement_database;
+﻿using Microsoft.EntityFrameworkCore;
+using StudentManagement_MVC.Models.StuddentManagement_database;
 
 namespace StudentManagement_MVC.Data.Service
 {
@@ -14,23 +15,23 @@ namespace StudentManagement_MVC.Data.Service
         public async Task AddSubject(Subject subject)
         {
             //throw new NotImplementedException();
-            if(subject != null)
+            if (subject != null)
             {
-                await _context.Subjects.Add(subject)    ;
+                _context.Subjects.Add(subject);
                 await _context.SaveChangesAsync();
 
             }
 
         }
 
-        
+
         public async Task DeleteSubject(string? subID)
         {
             //throw new NotImplementedException();
-            var subjectInDb = await _context.Subjects.firstOrDefaultAsync(s => s.SubId == subID);
-            if (subjectInDb !=null)
+            var subjectInDb = await _context.Subjects.FirstOrDefaultAsync(s => s.SubId == subID);
+            if (subjectInDb != null)
             {
-                _context.Subjects.remove(subjectInDb);
+                _context.Subjects.Remove(subjectInDb);
                 await _context.SaveChangesAsync();
             }
         }
@@ -38,7 +39,7 @@ namespace StudentManagement_MVC.Data.Service
         public async Task<IEnumerable<Subject>> GetAllSubject()
         {
             //throw new NotImplementedException();
-            var subjectList= await _context.Subjects.ToListAsync();
+            var subjectList = await _context.Subjects.ToListAsync();
             return subjectList;
         }
 
@@ -49,8 +50,9 @@ namespace StudentManagement_MVC.Data.Service
             if (subjectInDb != null)
             {
                 subjectInDb.Subname = subject.Subname;
-                
+
                 await _context.SaveChangesAsync();
             }
+        }
     }
 }
