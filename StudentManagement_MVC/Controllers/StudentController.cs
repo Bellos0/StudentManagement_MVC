@@ -20,13 +20,25 @@ namespace StudentManagement_MVC.Controllers
             return View("~/Views/StudentManagementView/Student/Index.cshtml", students);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Add(Student student)
+        [HttpGet]
+        public  ActionResult Add()
         {
+            return View("~/Views/StudentManagementView/Student/AddStudent.cshtml");
+        }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> Add(Student? student)
+        {
+            if (student == null)
+            {
+                return View("~/Views/StudentManagementView/Student/AddStudent.cshtml");
+            }
             if (ModelState.IsValid)
             {
                 await _studentService.AddStudent(student);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Student");
             }
             return View("~/Views/StudentManagementView/Student/AddStudent.cshtml", student);
         }
@@ -39,17 +51,21 @@ namespace StudentManagement_MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> GenStuID()
         {
+            
             string strStuID;
             Random rnd = new Random();
-            string _subStuID_datetime = DateTime.Now.ToString("yyyyMMdd");
-            _subStuID_datetime = _subStuID_datetime.Remove(0, 2);
-            strStuID = _subStuID_datetime + rnd.Next(0, 9999).ToString();
+            string _subStuID_datetime = DateTime.Now.ToString("yyyyMM").Remove(0,2);
+            strStuID = _subStuID_datetime +"-" +rnd.Next(0, 9999).ToString();
             var _existStudent = await _studentService.GetStudentbyID(strStuID);
             if (_existStudent == null)
             {
-                _existStudent.StuId = strStuID;
+                Student newStu = new Student();
+                newStu.StuId = strStuID;
+              await _studentService.AddStudent(newStu);
+                return View("~/Views/StudentManagementView/Student/AddStudent.cshtml", newStu);
+
             }
-            return View("~/Views/StudentManagementView/Student/AddStudent.cshtml", _existStudent);
+            return View("~/Views/StudentManagementView/Student/AddStudent.cshtml");
 
         }
 
@@ -64,7 +80,7 @@ namespace StudentManagement_MVC.Controllers
         {
             if (string.IsNullOrEmpty(StuID))
             {
-                return RedirectToAction("~/Views/StudentManagementView/Student/EditStudent.cshtml");
+                return View("~/Views/StudentManagementView/Student/EditStudent.cshtml", null);
             }
             var student = await _studentService.GetStudentbyID(StuID);
             if (student == null)

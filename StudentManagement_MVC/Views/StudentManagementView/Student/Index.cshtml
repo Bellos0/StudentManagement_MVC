@@ -1,12 +1,14 @@
 ﻿@model IEnumerable<StudentManagement_MVC.Models.StuddentManagement_database.Student>;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers;
 
 <div>
     <h1> Student list </h1>
 </div>
-<div class="table-primary">
-    <table>
-        <thead>
+<div >
+    <table >
+        <thead class="table">
             <tr>
+                <th>No</th>
                 <th>Student ID</th>
                 <th>Student Name</th>
                 <th>Class</th>
@@ -14,10 +16,11 @@
                 <th>Parrent Phone</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="table-info">
             @foreach (var item in Model)
             {
                 <tr>
+                    <td>@item.Id</td>
                     <td>@item.StuId</td>
                     <td>@item.Fullname</td>
                     <td>@item.Class</td>
@@ -27,4 +30,14 @@
             }
         </tbody>
     </table>
+</div>
+
+<div>
+    <a asp-action="SearchStudentByID" asp-controller="Student" class="btn btn-primary"> Edit Student </a>
+
+    @* luu y o nhung method dang post muon hien thi thong tin trang dang url.action hoac asp-action, asp-controller thi buoc phai tao mot method dang httpget de hien thi, sau do moi tao method dang httppost de xu ly du lieu *@
+
+    <a  asp-action="Add" asp-controller="Student" class="btn btn-secondary">Add Student</a>
+
+       
 </div>

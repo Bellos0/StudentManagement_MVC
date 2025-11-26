@@ -1,16 +1,18 @@
-﻿@model sstudentManagement_MVC.Models.Student;
+﻿@model StudentManagement_MVC.Models.StuddentManagement_database.Student;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers;
+
 
 <div>
     <h1> Modified Student Information </h1>
     <form asp-action="SearchStudentByID" method="get">
         <div>
             <label>Input Id </label>
-            <input type="text" for="StuID" />
+            <input type="text" asp-for="StuId" />
             <button type="submit">Search</button>
         </div>
     </form>
 
-    @if (model != null)
+    @if (Model != null)
     {
         <form asp-action="EditInfo" method="post">
             <div>
@@ -43,7 +45,7 @@
                 <input asp-for="ParentPhone" type="text" class="form-control" />
             </div>
             <button type="submit" class="btn btn-primary">Update Student</button>
-            <a type="button" class="btn btn-danger" href="@Url.Action("Index")">Cancel</a>
+            <a type="button" class="btn btn-danger" asp-action="Index" asp-controller="Student">Cancel</a>
         </form>
     }
 </div>

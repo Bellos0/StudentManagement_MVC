@@ -1,16 +1,22 @@
-﻿@model StudentManagement_MVC.Models.Student;
+﻿@model StudentManagement_MVC.Models.StuddentManagement_database.Student;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers;
+
 
 <div class="container">
     <h1>Add Student</h1>
-<script>
+    <script>
 
-</script>
-    <form asp-action="AddStudent" method="post">
+    </script>
+    <form asp-action="GenStuID" asp-controller="Student" method="post">
         <div>
             <label for="StuId" class="form-label">Student ID</label>
-            <input asp-for="StuId" type="text" class="form-control" readonly/>
-            <button type="button" class="btn btn-secondary" asp-action="GenStuID">Generate ID</button>
+            <input asp-for="StuId" type="text" class="form-control" readonly required />
+            <button type="submit" class="btn btn-secondary">Generate ID</button>
         </div>
+    </form>
+
+
+    <form asp-action="AddStudent" asp-asp-controller="Student" method="post">
         <div>
             <label for="Fullname" class="form-label">Full Name</label>
             <input asp-for="Fullname" type="text" class="form-control" required />
@@ -36,6 +42,6 @@
             <input asp-for="ParentPhone" type="text" class="form-control" />
         </div>
         <button type="submit" class="btn btn-primary">Add Student</button>
-        <a class="btn btn-danger" href= href=@Url.Action("Index")>Cancel</a>
+        <a class="btn btn-secondary" asp-action="Index" asp-asp-controller="Student">Back to list</a>
     </form>
 </div>
