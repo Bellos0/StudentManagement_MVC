@@ -4,28 +4,29 @@
 <div>
     <h1> Student list </h1>
 </div>
-<div >
-    <table >
+<div>
+    <table>
         <thead class="table">
             <tr>
-                <th>No</th>
-                <th>Student ID</th>
-                <th>Student Name</th>
-                <th>Class</th>
-                <th>Address</th>
-                <th>Parrent Phone</th>
+                <th class="border-3">No</th>
+                <th class="border-3">Student ID</th>
+                <th class="border-3">Student Name</th>
+                <th class="border-3">Class</th>
+                <th class="border-3">Address</th>
+                <th class="border-3">Parrent Phone</th>
             </tr>
         </thead>
         <tbody class="table-info">
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@item.Id</td>
-                    <td>@item.StuId</td>
-                    <td>@item.Fullname</td>
-                    <td>@item.Class</td>
-                    <td>@item.Address</td>
-                    <td>@item.ParentPhone</td>
+                    
+                    <td class="border-2">@item.Id</td>
+                    <td class ="border-2">@item.StuId</td>
+                    <td class="border-2">@item.Fullname</td>
+                    <td class="border-2 ">@item.Class</td>
+                    <td class="border-2">@item.Address</td>
+                    <td class="border-2">@item.ParentPhone</td>
                 </tr>
             }
         </tbody>
@@ -37,7 +38,7 @@
 
     @* luu y o nhung method dang post muon hien thi thong tin trang dang url.action hoac asp-action, asp-controller thi buoc phai tao mot method dang httpget de hien thi, sau do moi tao method dang httppost de xu ly du lieu *@
 
-    <a  asp-action="Add" asp-controller="Student" class="btn btn-secondary">Add Student</a>
+    <a asp-action="Add" asp-controller="Student" class="btn btn-secondary">Add Student</a>
 
-       
+
 </div>

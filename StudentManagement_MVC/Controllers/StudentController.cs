@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ActionConstraints;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using StudentManagement_MVC.Data;
 using StudentManagement_MVC.Data.Service;
+using StudentManagement_MVC.Models;
 using StudentManagement_MVC.Models.StuddentManagement_database;
 
 namespace StudentManagement_MVC.Controllers
@@ -31,11 +34,29 @@ namespace StudentManagement_MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(Student? student)
         {
+            
+            string strStuID;
+            Random rnd = new Random();
+            string _subStuID_datetime = DateTime.Now.ToString("yyyyMM").Remove(0, 2);
+            strStuID = _subStuID_datetime + "-" + rnd.Next(0, 9999).ToString();
+            var _existStudent = await _studentService.GetStudentbyID(strStuID);
+            if (_existStudent == null && student != null)
+            {
+                student.StuId = strStuID;
+                // vi model da duoc add thong qua doi so truyen vao, nen khi set lai gia tri cho no se bi loi validate.
+                // de co the cap nhat lai gia tri ta buoc phai xoa StuId ban dau va set lai gia tri moi, khi ay se k bi loi validate nua
+                ModelState.Remove("StuId"); 
+
+            }
+
             if (student == null)
             {
                 return View("~/Views/StudentManagementView/Student/AddStudent.cshtml");
             }
-            if (ModelState.IsValid)
+
+
+
+            if (ModelState.IsValid )
             {
                 await _studentService.AddStudent(student);
                 return RedirectToAction("Index","Student");
@@ -43,31 +64,6 @@ namespace StudentManagement_MVC.Controllers
             return View("~/Views/StudentManagementView/Student/AddStudent.cshtml", student);
         }
 
-
-        /// <summary>
-        /// cai nay de tao tu dong ma hoc sinh, mai ve can chay kiem chung xem the nao
-        /// </summary>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<IActionResult> GenStuID()
-        {
-            
-            string strStuID;
-            Random rnd = new Random();
-            string _subStuID_datetime = DateTime.Now.ToString("yyyyMM").Remove(0,2);
-            strStuID = _subStuID_datetime +"-" +rnd.Next(0, 9999).ToString();
-            var _existStudent = await _studentService.GetStudentbyID(strStuID);
-            if (_existStudent == null)
-            {
-                Student newStu = new Student();
-                newStu.StuId = strStuID;
-              await _studentService.AddStudent(newStu);
-                return View("~/Views/StudentManagementView/Student/AddStudent.cshtml", newStu);
-
-            }
-            return View("~/Views/StudentManagementView/Student/AddStudent.cshtml");
-
-        }
 
 
         /// <summary>
@@ -94,12 +90,18 @@ namespace StudentManagement_MVC.Controllers
         }
 
 
-
+        /// <summary>
+        /// sua thong tin student 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> EditInfo(Student model)
         {
             await _studentService.ModifyStudent(model);
             return View("~/Views/StudentManagementView/Student/Index.cshtml", model);
         }
+
+
     }
 }

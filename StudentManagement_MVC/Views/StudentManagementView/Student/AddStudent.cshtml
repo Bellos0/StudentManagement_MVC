@@ -4,30 +4,29 @@
 
 <div class="container">
     <h1>Add Student</h1>
-    <script>
 
-    </script>
-    <form asp-action="GenStuID" asp-controller="Student" method="post">
+    <form asp-action="Add" asp-controller="Student" method="post">
         <div>
-            <label for="StuId" class="form-label">Student ID</label>
-            <input asp-for="StuId" type="text" class="form-control" readonly required />
-            <button type="submit" class="btn btn-secondary">Generate ID</button>
+            <input asp-for="StuId" type="hidden" class="form-control" readonly required />
         </div>
-    </form>
-
-
-    <form asp-action="AddStudent" asp-asp-controller="Student" method="post">
         <div>
+
             <label for="Fullname" class="form-label">Full Name</label>
-            <input asp-for="Fullname" type="text" class="form-control" required />
+            <input asp-for="Fullname" type="text" class="form-control " required />
         </div>
         <div>
             <label for="DoB" class="form-label">Date of Birth</label>
-            <input asp-for="DoB" type="text" class="form-control" required />
+            <input asp-for="DoB" type="date" class="form-control " required />
         </div>
         <div>
             <label for="Sex" class="form-label">Sex</label>
-            <input asp-for="Sex" type="text" class="form-control" />
+            <select asp-for="Sex" class="form-control">
+                <option value="" disabled selected>--Select Sex---</option>
+                <option>Male</option>
+                <option>Female</option>
+            </select>
+
+
         </div>
         <div>
             <label for="Class" class="form-label">Class</label>
@@ -42,6 +41,6 @@
             <input asp-for="ParentPhone" type="text" class="form-control" />
         </div>
         <button type="submit" class="btn btn-primary">Add Student</button>
-        <a class="btn btn-secondary" asp-action="Index" asp-asp-controller="Student">Back to list</a>
+        <a class="btn btn-secondary" asp-action="Index" asp-controller="Student">Back to list</a>
     </form>
 </div>
