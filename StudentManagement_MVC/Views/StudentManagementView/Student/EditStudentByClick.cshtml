@@ -1,0 +1,51 @@
+﻿@model StudentManagement_MVC.Models.StuddentManagement_database.Student;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers;
+
+
+<div>
+    <h1> Modified Student Information by click </h1>
+
+    @if (Model !=null)
+    {
+        <form asp-action="EditInfor" method="post" asp-controller="Student">
+            <div>
+                <label for="StuId" class="form-label">Student ID</label>
+                <input asp-for="StuId" type="text" class="form-control" readonly />
+                @* <button type="button" class="btn btn-secondary" asp-action="GenStuID">Generate ID</button> *@
+            </div>
+            <div>
+                <label for="Fullname" class="form-label">Full Name</label>
+                <input asp-for="Fullname" type="text" class="form-control" required />
+            </div>
+            <div>
+                <label for="DoB" class="form-label">Date of Birth</label>
+                <input asp-for="DoB" type="date" class="form-control" required />
+            </div>
+            <div>
+                <label for="Sex" class="form-label">Sex</label>
+                @* <input asp-for="Sex" type="text" class="form-control" /> *@
+                <select asp-for="Sex">
+                    <option value="" disabled selected>--Select Sex--</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                </select>
+            </div>
+            <div>
+                <label for="Class" class="form-label">Class</label>
+                <input asp-for="Class" type="text" class="form-control" required />
+            </div>
+            <div>
+                <label for="Address" class="form-label">Address</label>
+                <input asp-for="Address" type="text" class="form-control" required />
+            </div>
+            <div>
+                <label for="ParentPhone" class="form-label">ParentPhone</label>
+                <input asp-for="ParentPhone" type="text" class="form-control" required />
+            </div>
+            <button type="submit"  class="btn btn-primary">Update Information</button>
+            <a  class="btn btn-danger" asp-action="Index" asp-controller="Student">Back to List</a>
+        </form>
+    }
+    
+    
+</div>

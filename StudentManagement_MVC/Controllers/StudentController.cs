@@ -24,7 +24,7 @@ namespace StudentManagement_MVC.Controllers
         }
 
         [HttpGet]
-        public  ActionResult Add()
+        public ActionResult Add()
         {
             return View("~/Views/StudentManagementView/Student/AddStudent.cshtml");
         }
@@ -34,7 +34,7 @@ namespace StudentManagement_MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(Student? student)
         {
-            
+
             string strStuID;
             Random rnd = new Random();
             string _subStuID_datetime = DateTime.Now.ToString("yyyyMM").Remove(0, 2);
@@ -45,7 +45,7 @@ namespace StudentManagement_MVC.Controllers
                 student.StuId = strStuID;
                 // vi model da duoc add thong qua doi so truyen vao, nen khi set lai gia tri cho no se bi loi validate.
                 // de co the cap nhat lai gia tri ta buoc phai xoa StuId ban dau va set lai gia tri moi, khi ay se k bi loi validate nua
-                ModelState.Remove("StuId"); 
+                ModelState.Remove("StuId");
 
             }
 
@@ -56,10 +56,10 @@ namespace StudentManagement_MVC.Controllers
 
 
 
-            if (ModelState.IsValid )
+            if (ModelState.IsValid)
             {
                 await _studentService.AddStudent(student);
-                return RedirectToAction("Index","Student");
+                return RedirectToAction("Index", "Student");
             }
             return View("~/Views/StudentManagementView/Student/AddStudent.cshtml", student);
         }
@@ -67,7 +67,7 @@ namespace StudentManagement_MVC.Controllers
 
 
         /// <summary>
-        /// tim hoc sinh bang so id de dien vao form edit
+        /// tim hoc sinh bang so id de dien vao form edit student
         /// </summary>
         /// <param name="StuID"></param>
         /// <returns></returns>
@@ -91,7 +91,8 @@ namespace StudentManagement_MVC.Controllers
 
 
         /// <summary>
-        /// sua thong tin student 
+        /// sua thong tin student,
+        /// chinh sua thong tin thong qua form edit student
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
@@ -102,6 +103,43 @@ namespace StudentManagement_MVC.Controllers
             return View("~/Views/StudentManagementView/Student/Index.cshtml", model);
         }
 
+
+
+        /// <summary>
+        /// get thong tin bang nut edit o index page.
+        /// sau do fill vao trong form edit student by click
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet ]//("{id:int}")]
+        public async Task<IActionResult> EditInfor(int id)
+        {
+            var student = await _studentService.GetStudentbyID(id);// tra ra model student
+            //await _studentService.ModifyStudent(student);
+            return View("~/Views/StudentManagementView/Student/EditStudentByClick.cshtml", student);
+        }
+        /// <summary>
+        /// edit update info bang cach click edit o index page
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> EditInfor(Student model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _studentService.ModifyStudent(model);
+                return View("~/Views/StudentManagementView/Student/Index.cshtml", model);
+            }
+            else
+            {
+                await _studentService.ModifyStudent(model);
+                TryValidateModel(model);
+                return View("~/Views/StudentManagementView/Student/Index.cshtml", model);
+            }
+            //return View("~/Views/StudentManagementView/Student/EditStudentByClick.cshtml", model);
+
+        }
 
     }
 }

@@ -42,7 +42,7 @@ namespace StudentManagement_MVC.Data.Service
             var studentInDb = await _context.Students.FirstOrDefaultAsync(s => s.Id == student.Id);
             if (studentInDb != null)
             {
-                studentInDb.StuId = student.StuId.TrimStart().TrimEnd();
+                //studentInDb.StuId = student.StuId.TrimStart().TrimEnd();
                 studentInDb.Fullname = student.Fullname.TrimStart().TrimEnd();
                 studentInDb.DoB = student.DoB;
                 studentInDb.Sex = student.Sex.TrimStart().TrimEnd();
@@ -59,6 +59,30 @@ namespace StudentManagement_MVC.Data.Service
         {
             //throw new NotImplementedException();
             return _context.Students.FirstOrDefaultAsync(s=>s.StuId == StuID);
+        }
+
+        //public async Task ModifyStudent(int id)
+        //{
+        //    //throw new NotImplementedException();
+
+        //    var studentInDb = await _context.Students.FirstOrDefaultAsync(s => s.Id == id);
+        //    if (studentInDb != null)
+        //    {
+        //        studentInDb.Id = studentInDb.Id;
+        //        studentInDb.StuId = studentInDb.StuId;
+        //        studentInDb.Fullname = studentInDb.Fullname;
+        //        studentInDb.DoB = studentInDb.DoB;
+        //        studentInDb.Sex = studentInDb.Sex;
+        //        studentInDb.Class = studentInDb.Class;
+        //        studentInDb.Address = studentInDb.Address;
+        //        studentInDb.ParentPhone = studentInDb.ParentPhone;
+        //    }
+        //}
+
+        public Task<Student?> GetStudentbyID(int id)
+        {
+            //throw new NotImplementedException();
+            return _context.Students.FirstOrDefaultAsync(s => s.Id == id);
         }
     }
 }

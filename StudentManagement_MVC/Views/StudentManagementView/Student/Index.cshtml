@@ -18,18 +18,18 @@
         </thead>
         <tbody class="table-info">
 
-            @{
-                int a, b;
-                do
-                {
-                    a = Random.Shared.Next(9, 20);
-                     b = Random.Shared.Next(9, 20);
-                }
-                while (a > b);
+            @* @{
+                // int a, b;
+                // do
+                // {
+                //     a = Random.Shared.Next(9, 20);
+                //      b = Random.Shared.Next(9, 20);
+                // }
+                // while (a > b);
 
 
                 List<StudentManagement_MVC.Models.StuddentManagement_database.Student> students = Model.ToList();
-                for (int i = a; i < b; i++)
+                for (int i = 0; i < students.Count; i++)
                 {
                     <tr>
                         <td class="border-3">@students[i].Id</td>
@@ -38,12 +38,12 @@
                         <td class="border-3">@students[i].Class</td>
                         <td class="border-3">@students[i].Address</td>
                         <td class="border-3">@students[i].ParentPhone</td>
-                        // <td> <a href="#"> Edit </a></td>
+                        <td> <a asp-controller="Student" asp-action="EditInfor" asp-route-Id="@students[i].Id" class="btn"> Edit </a></td>
                     </tr>
                 }
-            }
+            } *@
 
-            @* @foreach (var item in Model)
+            @foreach (var item in Model)
             {
                 <tr>
                     
@@ -53,8 +53,9 @@
                     <td class="border-2 ">@item.Class</td>
                     <td class="border-2">@item.Address</td>
                     <td class="border-2">@item.ParentPhone</td>
+                    <td> <a asp-controller="Student" asp-action="EditInfor" asp-route-Id="@item.Id" class="btn btn-secondary"> Edit </a></td>
                 </tr>
-            } *@
+            }
         </tbody>
     </table>
 </div>

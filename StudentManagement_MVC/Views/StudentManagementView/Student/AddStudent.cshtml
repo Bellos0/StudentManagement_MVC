@@ -5,15 +5,24 @@
 <div class="container">
     <h1>Add Student</h1>
 
-    <form asp-action="Add" asp-controller="Student" method="post">
+    <form asp-action="Add"
+          asp-controller="Student"
+          method="post">
         <div>
             <label for="StuId" class="form-label">Student ID</label>
-            <input asp-for="StuId" type="text" class="form-control" readonly required />
+            <input asp-for="StuId"
+                   type="text"
+                   class="form-control"
+                   readonly
+                   required />
         </div>
         <div>
 
             <label for="Fullname" class="form-label">Full Name</label>
-            <input asp-for="Fullname" type="text" class="form-control " required />
+            <input asp-for="Fullname"
+                   type="text"
+                   class="form-control "
+                   required />
         </div>
         <div>
             <label for="DoB" class="form-label">Date of Birth</label>
