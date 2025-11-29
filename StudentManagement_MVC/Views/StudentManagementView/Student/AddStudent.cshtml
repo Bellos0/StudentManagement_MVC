@@ -7,7 +7,8 @@
 
     <form asp-action="Add" asp-controller="Student" method="post">
         <div>
-            <input asp-for="StuId" type="hidden" class="form-control" readonly required />
+            <label for="StuId" class="form-label">Student ID</label>
+            <input asp-for="StuId" type="text" class="form-control" readonly required />
         </div>
         <div>
 

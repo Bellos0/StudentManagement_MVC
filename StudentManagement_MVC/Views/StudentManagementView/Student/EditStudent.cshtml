@@ -18,15 +18,15 @@
             <div>
                 <label for="StuId" class="form-label">Student ID</label>
                 <input asp-for="StuId" type="text" class="form-control" readonly />
-                <button type="button" class="btn btn-secondary" asp-action="GenStuID">Generate ID</button>
+                @* <button type="button" class="btn btn-secondary" asp-action="GenStuID">Generate ID</button> *@
             </div>
             <div>
                 <label for="Fullname" class="form-label">Full Name</label>
-                <input asp-for="Fullname" type="text" class="form-control" required />
+                <input asp-for="Fullname" type="text" class="form-control"  />
             </div>
             <div>
                 <label for="DoB" class="form-label">Date of Birth</label>
-                <input asp-for="DoB" type="text" class="form-control" required />
+                <input asp-for="DoB" type="text" class="form-control"  />
             </div>
             <div>
                 <label for="Sex" class="form-label">Sex</label>
@@ -45,7 +45,7 @@
                 <input asp-for="ParentPhone" type="text" class="form-control" />
             </div>
             <button type="submit" class="btn btn-primary">Update Student</button>
-            <a type="button" class="btn btn-danger" asp-action="Index" asp-controller="Student">Cancel</a>
+            <a type="button" class="btn btn-danger" asp-action="Index" asp-controller="Student">Back to List</a>
         </form>
     }
 </div>

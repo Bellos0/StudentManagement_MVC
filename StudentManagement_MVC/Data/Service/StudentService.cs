@@ -42,12 +42,12 @@ namespace StudentManagement_MVC.Data.Service
             var studentInDb = await _context.Students.FirstOrDefaultAsync(s => s.Id == student.Id);
             if (studentInDb != null)
             {
-                studentInDb.StuId = student.StuId;
-                studentInDb.Fullname = student.Fullname;
+                studentInDb.StuId = student.StuId.TrimStart().TrimEnd();
+                studentInDb.Fullname = student.Fullname.TrimStart().TrimEnd();
                 studentInDb.DoB = student.DoB;
-                studentInDb.Sex = student.Sex;
-                studentInDb.Address = student.Address;
-                studentInDb.ParentPhone = student.ParentPhone;
+                studentInDb.Sex = student.Sex.TrimStart().TrimEnd();
+                studentInDb.Address = student.Address.TrimStart().TrimEnd();
+                studentInDb.ParentPhone = student.ParentPhone.TrimStart().TrimEnd();
                 await _context.SaveChangesAsync();
 
             }
