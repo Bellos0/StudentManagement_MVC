@@ -17,19 +17,23 @@
             </tr>
         </thead>
         <tbody class="table-info">
-
-            @* @{
-                // int a, b;
-                // do
-                // {
-                //     a = Random.Shared.Next(9, 20);
-                //      b = Random.Shared.Next(9, 20);
-                // }
-                // while (a > b);
+           
+            @{
+                /*
+                * su dung vong lap for de hien thi lit danh sach o index page thay cho foreach
+                * boi vi foreach duyet toan bo phan tu trong cllection, neu collect rat lon thi hien thi se gay loi time out
+                 */
+                int a, b;
+                do
+                {
+                    a = Random.Shared.Next(9, 20);
+                     b = Random.Shared.Next(9, 20);
+                }
+                while (a > b);
 
 
                 List<StudentManagement_MVC.Models.StuddentManagement_database.Student> students = Model.ToList();
-                for (int i = 0; i < students.Count; i++)
+                for (int i = 0; i < students.Count-8; i++)
                 {
                     <tr>
                         <td class="border-3">@students[i].Id</td>
@@ -38,24 +42,27 @@
                         <td class="border-3">@students[i].Class</td>
                         <td class="border-3">@students[i].Address</td>
                         <td class="border-3">@students[i].ParentPhone</td>
-                        <td> <a asp-controller="Student" asp-action="EditInfor" asp-route-Id="@students[i].Id" class="btn"> Edit </a></td>
+                        <td> <a asp-controller="Student" asp-action="EditInfor" asp-route-Id="@students[i].Id" class="btn btn-primary"> Edit </a></td>
                     </tr>
                 }
-            } *@
+            }
 
-            @foreach (var item in Model)
+           @*  @foreach (var item in Model)
             {
                 <tr>
-                    
+
                     <td class="border-2">@item.Id</td>
-                    <td class ="border-2">@item.StuId</td>
+                    <td class="border-2">@item.StuId</td>
                     <td class="border-2">@item.Fullname</td>
-                    <td class="border-2 ">@item.Class</td>
+                    <td class="border-2">@item.Class</td>
                     <td class="border-2">@item.Address</td>
                     <td class="border-2">@item.ParentPhone</td>
-                    <td> <a asp-controller="Student" asp-action="EditInfor" asp-route-Id="@item.Id" class="btn btn-secondary"> Edit </a></td>
+                    <td> <a asp-controller="Student"
+                            asp-action="EditInfor"
+                            asp-route-Id="@item.Id"
+                            class="btn btn-secondary"> Edit </a></td>
                 </tr>
-            }
+            } *@
         </tbody>
     </table>
 </div>

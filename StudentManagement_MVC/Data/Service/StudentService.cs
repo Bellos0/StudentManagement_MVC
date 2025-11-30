@@ -43,9 +43,13 @@ namespace StudentManagement_MVC.Data.Service
             if (studentInDb != null)
             {
                 //studentInDb.StuId = student.StuId.TrimStart().TrimEnd();
+                // khongo the thay doi duoc stuId vi no la khoa chinh cua bang va dong thoi dang la tham chieu cua bang score,
+                // vay nen entityframework va sql server khonog cho phep thay doi.
+
                 studentInDb.Fullname = student.Fullname.TrimStart().TrimEnd();
                 studentInDb.DoB = student.DoB;
                 studentInDb.Sex = student.Sex.TrimStart().TrimEnd();
+                studentInDb.Class = student.Class.TrimStart().TrimEnd();
                 studentInDb.Address = student.Address.TrimStart().TrimEnd();
                 studentInDb.ParentPhone = student.ParentPhone.TrimStart().TrimEnd();
                 await _context.SaveChangesAsync();

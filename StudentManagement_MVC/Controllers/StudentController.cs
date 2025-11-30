@@ -129,16 +129,17 @@ namespace StudentManagement_MVC.Controllers
             if (ModelState.IsValid)
             {
                 await _studentService.ModifyStudent(model);
-                return View("~/Views/StudentManagementView/Student/Index.cshtml", model);
+                TryValidateModel(model);
+                var _student = await _studentService.GetAllStudents();
+                return View("~/Views/StudentManagementView/Student/Index.cshtml", _student);
             }
             else
             {
-                await _studentService.ModifyStudent(model);
-                TryValidateModel(model);
-                return View("~/Views/StudentManagementView/Student/Index.cshtml", model);
+                //await _studentService.ModifyStudent(model);
+                //TryValidateModel(model);
+               return View("~/Views/StudentManagementView/Student/EditStudentByClick.cshtml", model);
             }
-            //return View("~/Views/StudentManagementView/Student/EditStudentByClick.cshtml", model);
-
+           
         }
 
     }
