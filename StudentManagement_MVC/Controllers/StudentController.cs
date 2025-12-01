@@ -5,6 +5,7 @@ using StudentManagement_MVC.Data;
 using StudentManagement_MVC.Data.Service;
 using StudentManagement_MVC.Models;
 using StudentManagement_MVC.Models.StuddentManagement_database;
+using System.Text.RegularExpressions;
 
 namespace StudentManagement_MVC.Controllers
 {
@@ -111,7 +112,7 @@ namespace StudentManagement_MVC.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet ]//("{id:int}")]
+        [HttpGet]//("{id:int}")]
         public async Task<IActionResult> EditInfor(int id)
         {
             var student = await _studentService.GetStudentbyID(id);// tra ra model student
@@ -137,10 +138,24 @@ namespace StudentManagement_MVC.Controllers
             {
                 //await _studentService.ModifyStudent(model);
                 //TryValidateModel(model);
-               return View("~/Views/StudentManagementView/Student/EditStudentByClick.cshtml", model);
+                return View("~/Views/StudentManagementView/Student/EditStudentByClick.cshtml", model);
             }
-           
+
         }
 
+
+        [HttpGet]
+        public  IActionResult SearchByContains(string? strSearch)
+        {
+
+            
+            if (strSearch != null)
+            {
+                var studentSeach = _studentService.GetAllStudentsByContaint(strSearch);
+                return View("~/Views/StudentManagementView/Student/SearchAndResult.cshtml", studentSeach);
+            }
+
+            return View("~/Views/StudentManagementView/Student/SearchAndResult.cshtml");
+        }
     }
 }

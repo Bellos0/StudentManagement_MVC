@@ -1,6 +1,12 @@
 ﻿@model IEnumerable<StudentManagement_MVC.Models.StuddentManagement_database.Student>;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers;
 
+
+<div>
+    <p><a asp-action="SearchByContains" asp-controller="Student"> Navigate to Search</a></p>
+</div>
+
+
 <div>
     <h1> Student list </h1>
 </div>
@@ -33,7 +39,7 @@
 
 
                 List<StudentManagement_MVC.Models.StuddentManagement_database.Student> students = Model.ToList();
-                for (int i = 0; i < students.Count-8; i++)
+                for (int i = 0; i < students.Count; i++)
                 {
                     <tr>
                         <td class="border-3">@students[i].Id</td>

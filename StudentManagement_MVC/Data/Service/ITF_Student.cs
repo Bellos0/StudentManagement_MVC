@@ -11,5 +11,7 @@ namespace StudentManagement_MVC.Data.Service
         //Task ModifyStudent(int id);
         Task DeleteStudent(Student student);
         Task<IEnumerable<Student>> GetAllStudents();
+
+        IEnumerable<Student> GetAllStudentsByContaint(string strSearch);
     }
 }

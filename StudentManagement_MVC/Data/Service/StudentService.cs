@@ -15,7 +15,7 @@ namespace StudentManagement_MVC.Data.Service
             //throw new NotImplementedException();
             _context.Students.Add(student);
             await _context.SaveChangesAsync();
-            
+
         }
 
         public async Task DeleteStudent(Student student)
@@ -57,12 +57,12 @@ namespace StudentManagement_MVC.Data.Service
             }
         }
 
-      
+
 
         public Task<Student?> GetStudentbyID(string StuID)
         {
             //throw new NotImplementedException();
-            return _context.Students.FirstOrDefaultAsync(s=>s.StuId == StuID);
+            return _context.Students.FirstOrDefaultAsync(s => s.StuId == StuID);
         }
 
         //public async Task ModifyStudent(int id)
@@ -87,6 +87,22 @@ namespace StudentManagement_MVC.Data.Service
         {
             //throw new NotImplementedException();
             return _context.Students.FirstOrDefaultAsync(s => s.Id == id);
+        }
+
+        public IEnumerable<Student> GetAllStudentsByContaint(string strSearch)
+        {
+            //throw new NotImplementedException();
+            IQueryable<Student> query = _context.Students;
+            if (!string.IsNullOrEmpty(strSearch))
+            {
+                query = query.Where<Student>
+                    (
+                    s => s.Fullname.ToString().Contains(strSearch)
+                || s.StuId.ToString().Contains(strSearch)
+                || s.Class.ToString().Contains(strSearch)
+                );
+            }
+            return query.ToList();
         }
     }
 }

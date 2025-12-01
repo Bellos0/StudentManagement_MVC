@@ -1,0 +1,47 @@
+﻿@model IEnumerable<StudentManagement_MVC.Models.StuddentManagement_database.Student>;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers;
+
+
+<div>
+    <h1> Search bar </h1>
+    <form asp-action="SearchByContains" asp-controller="Student" method="get">
+        <div>
+            <input type="text" name="searchTerm" placeholder="Enter student name or ID" asp-action="SearchByContains" />
+            <button type="submit" class="btn btn-primary">Search</button>
+
+        </div>
+        <div>
+            @if (Model != null)
+            {
+                <table>
+                    <thead class="table">
+                        <tr>
+                            <th class="border-3">ID</th>
+                            <th class="border-3">Student ID</th>
+                            <th class="border-3">Student Name</th>
+                            <th class="border-3">Class</th>
+                            <th class="border-3">Address</th>
+                            <th class="border-3">Parrent Phone</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-info">
+                        <tr>
+                            @foreach (var item in Model)
+                            {
+                                <td class="border-3">@item.Id</td>
+                                <td class="border-3">@item.StuId</td>
+                                <td class="border-3">@item.Fullname</td>
+                                <td class="border-3">@item.Class</td>
+                                <td class="border-3">@item.Address</td>
+                                <td class="border-3">@item.ParentPhone</td>
+
+                            }
+                        </tr>
+                    </tbody>
+
+                </table>
+            }
+        </div>
+
+    </form>
+</div>
