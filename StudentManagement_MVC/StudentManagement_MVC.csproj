@@ -15,8 +15,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\StudentManagementView\Score\" />
-  </ItemGroup>
-
 </Project>

@@ -6,7 +6,8 @@
     <h1> Search bar </h1>
     <form asp-action="SearchByContains" asp-controller="Student" method="get">
         <div>
-            <input type="text" name="searchTerm" placeholder="Enter student name or ID" asp-action="SearchByContains" />
+            <input type="text" name="strSearch" placeholder="Enter student name or ID" />
+            @* name="abc" thi abc match voi doi so truyen vao trong ham tim kiem thi moi thanh cong *@
             <button type="submit" class="btn btn-primary">Search</button>
 
         </div>
@@ -25,18 +26,25 @@
                         </tr>
                     </thead>
                     <tbody class="table-info">
-                        <tr>
-                            @foreach (var item in Model)
-                            {
-                                <td class="border-3">@item.Id</td>
-                                <td class="border-3">@item.StuId</td>
-                                <td class="border-3">@item.Fullname</td>
-                                <td class="border-3">@item.Class</td>
-                                <td class="border-3">@item.Address</td>
-                                <td class="border-3">@item.ParentPhone</td>
+                        @* dung list va for de hien thi ket qua boi vi ket qua tra ve thong qua ham getstudentbycontains la .tolist()
+                        vay nen phai dung list va for, con foreach k dung duoc vi no khong phai la mang hay collection *@
+                        @{
+                            List<StudentManagement_MVC.Models.StuddentManagement_database.Student> students = Model.ToList();
 
+
+                            for (int i = 0; i < students.Count; i++)
+                            {
+                                <tr>
+                                    <td>@students[i].StuId</td>
+                                    <td>@students[i].Fullname</td>
+                                    <td>@students[i].DoB</td>
+                                    <td>@students[i].Address</td>
+                                    <td>@students[i].ParentPhone</td>
+                                </tr>
                             }
-                        </tr>
+
+                        }
+
                     </tbody>
 
                 </table>

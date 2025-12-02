@@ -50,7 +50,7 @@ app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Student}/{action=Index}/{id?}")
+    pattern: "{controller=Score}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 

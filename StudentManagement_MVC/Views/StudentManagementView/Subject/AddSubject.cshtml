@@ -1,20 +1,20 @@
 ﻿@model StudentManagement_MVC.Models.StuddentManagement_database.Subject;
-
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers;
 <div>
     <h1> Add Subject </h1>
-    <form action="AddSub" method="post">
+    <form asp-action="AddSub" asp-controller="Subject" method="post">
         <table>
             <tr>
                 <td>
                     <label for="SubId" class="form-label">Subject ID</label>
-                    <input type="text" name="SubId" class="form-control" />
+                    <input asp-for="SubId" type="text" name="SubId" class="form-control" />
                 </td>
                 <td>
                     <label for="Subname" class="form-label">Subject Name</label>
-                    <input type="text" name="Subname" class="form-control" />
+                    <input asp-for="Subname" type="text" name="Subname" class="form-control" />
                 </td>
         </table>
         <button type="submit" class="btn btn-primary">Add Subject</button>
-        <a href="@Url.Action("Index")" class="btn btn-danger">Back to list</a>
+        <a asp-action="Index" asp-controller="Subject" class="btn btn-danger">Back to list</a>
     </form>
 </div>

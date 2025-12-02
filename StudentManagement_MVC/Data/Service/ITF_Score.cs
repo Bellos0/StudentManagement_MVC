@@ -6,6 +6,7 @@ namespace StudentManagement_MVC.Data.Service
     {
         Task AddScore(Score score);
         Task ModifyScore(Score score);
-        Task DeleteScore(Score score);
+       Task <IEnumerable<Score>> GetScoresDB();
+       IEnumerable<Score> GetScoresbyContains(string? searchStr);
     }
 }

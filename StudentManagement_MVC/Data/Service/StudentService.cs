@@ -92,6 +92,10 @@ namespace StudentManagement_MVC.Data.Service
         public IEnumerable<Student> GetAllStudentsByContaint(string strSearch)
         {
             //throw new NotImplementedException();
+            /*
+             * contains la mot property thuoc string class, dung de tim kiem 1 chuoi con trong chuoi tong the
+             * vi du ten la test thi no se duyet het toan bo nhung chuoi co tu  test va day ra ket qua
+             */
             IQueryable<Student> query = _context.Students;
             if (!string.IsNullOrEmpty(strSearch))
             {
@@ -100,6 +104,7 @@ namespace StudentManagement_MVC.Data.Service
                     s => s.Fullname.ToString().Contains(strSearch)
                 || s.StuId.ToString().Contains(strSearch)
                 || s.Class.ToString().Contains(strSearch)
+                || s.ParentPhone.ToString().Contains(strSearch)
                 );
             }
             return query.ToList();

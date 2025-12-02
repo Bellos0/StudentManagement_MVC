@@ -1,7 +1,5 @@
 ﻿@model IEnumerable<StudentManagement_MVC.Models.StuddentManagement_database.Subject>;
-@* @model StudentManagement_MVC.Models.StuddentManagement_database.Subject; *@
-@* tao luon action xoa subject tai form index nay luon  *@
-
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers;
 <div>
     <h1> Subject List</h1>
 
@@ -19,15 +17,15 @@
                     <tr>
                         <td>@item.SubId</td>
                         <td>@item.Subname</td>
-                        <td>
-                            <form action="DelSubByID" method="post">
-                                <input type="hidden" value="@item.SubId" name="SubId"/>"
-                                <button type="submit">Deleted Subject by ID</button>
-                            </form>
-                        </td>
+                        @* chuc nang xoa bi ngan chan boi entity framework va sql server do dang co contraint foreign key *@
+                        @* <td>
+                            <a asp-action="DelSubByID" asp-controller="Subject" asp-route-SubId="@item.SubId">Deleted</a>
+
+                        </td> *@
                     </tr>
                 }
             </tbody>
+            <a asp-action="AddSub" asp-controller="Subject" class="btn btn-primary" class="btn btn-primary">Add Subject</a>
         </table>
     </div>
 </div>

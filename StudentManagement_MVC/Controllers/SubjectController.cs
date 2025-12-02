@@ -18,13 +18,29 @@ namespace StudentManagement_MVC.Controllers
             return View("~/Views/StudentManagementView/Subject/Index.cshtml", subjectlist);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> DelSubByID(string SubID)
+        /// <summary>
+        /// method to delete subject by its id, nhung thuc te khong xoa duoc do dang co contraint la foreign key, chuc nang deleted bi ngan chan boi entity framework va sql server
+        /// </summary>
+        /// <param name="SubId"></param>
+        /// <returns></returns>
+        public async Task<IActionResult> DelSubByID(string SubId)
         {
-            await _subjectService.DeleteSubject(SubID);
+            await _subjectService.DeleteSubject(SubId);
             return RedirectToAction("Index");
 
         }
+
+
+
+        [HttpGet]
+        public ActionResult AddSub()
+        {
+            
+                return View("~/Views/StudentManagementView/Subject/AddSubject.cshtml", null);
+           
+        }
+
+
 
 
         [HttpPost]

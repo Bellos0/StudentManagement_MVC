@@ -1,0 +1,81 @@
+﻿@model IEnumerable<StudentManagement_MVC.Models.StuddentManagement_database.Score>;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers;
+
+<div>
+    <h1>Score board</h1>
+
+    <div>
+        <label> Search by Student  </label>
+        <input type="text" name="searchStr" asp-action="SearchStudenContains" asp-controller="Score" />
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+
+    @{
+        if (Model != null)
+        {
+            <form asp-controller="Score" asp-action="SearchScoreStudenContains" method="post">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="border-1"> ID</th>
+                            <th class="border-1">Student Name</th>
+                            <th class="border-1">Average Score</th>
+                            <th class="border-1">Score 15 min</th>
+                            <th class="border-1">Socre 60 min</th>
+                            <th class="border-1">Subject ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            List<StudentManagement_MVC.Models.StuddentManagement_database.Score> scores = Model.ToList();
+                            for (int i = 0; i < scores.Count; i++)
+                            {
+                                <tr>
+                                    <td class="border-3">@scores[i].StuId</td>
+                                    <td class="border-3">@scores[i].Stuname</td>
+                                    <td class="border-3">@scores[i].AvgScore</td>
+                                    <td class="border-3">@scores[i].Score15</td>
+                                    <td class="border-3">@scores[i].Score60</td>
+                                    <td class="border-3">@scores[i].SubId</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </form>
+        }
+        else
+        {
+            <form asp-controller="Score" asp-action="Index" method="get">
+                <table>
+                    <thead>
+                    <thead>
+                        <tr>
+                            <th class="border-1"> ID</th>
+                            <th class="border-1">Student Name</th>
+                            <th class="border-1">Average Score</th>
+                            <th class="border-1">Score 15 min</th>
+                            <th class="border-1">Socre 60 min</th>
+                            <th class="border-1">Subject ID</th>
+                        </tr>
+                    </thead>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model)
+                        {
+                           <tr>
+                           <td class="border-3">@item.StuId</td>
+                                <td class="border-3">@item.Stuname</td>
+                                <td class="border-3">@item.AvgScore</td>
+                                <td class="border-3">@item.Score15</td>
+                                <td class="border-3">@item.Score60</td>
+                                <td class="border-3">@item.Sub</td>
+                           </tr> 
+                        }
+                    </tbody>
+                </table>
+            </form>
+        }
+
+    }
+</div>
