@@ -3,13 +3,13 @@
 
 <div>
     <h1>Score board</h1>
-
-    <div>
-        <label> Search by Student  </label>
-        <input type="text" name="searchStr" asp-action="SearchStudenContains" asp-controller="Score" />
-        <button type="submit" class="btn btn-primary">Search</button>
-    </div>
-
+    <form asp-action="SearchScoreStudenContains" method="get">
+        <div>
+            <label> Search by Student  </label>
+            <input asp-action="SearchScoreStudenContains" type="text" name="searchStr" />
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
     @{
         if (Model != null)
         {
@@ -37,6 +37,7 @@
                                     <td class="border-3">@scores[i].Score15</td>
                                     <td class="border-3">@scores[i].Score60</td>
                                     <td class="border-3">@scores[i].SubId</td>
+                                    <td> <a asp-action="ModifiedScore" asp-route-StuId="@scores[i].StuId" asp-controller="Score">Edit </a></td>
                                 </tr>
                             }
                         }
@@ -44,38 +45,41 @@
                 </table>
             </form>
         }
-        else
-        {
-            <form asp-controller="Score" asp-action="Index" method="get">
-                <table>
-                    <thead>
-                    <thead>
-                        <tr>
-                            <th class="border-1"> ID</th>
-                            <th class="border-1">Student Name</th>
-                            <th class="border-1">Average Score</th>
-                            <th class="border-1">Score 15 min</th>
-                            <th class="border-1">Socre 60 min</th>
-                            <th class="border-1">Subject ID</th>
-                        </tr>
-                    </thead>
-                    </thead>
-                    <tbody>
-                    @foreach (var item in Model)
-                        {
-                           <tr>
-                           <td class="border-3">@item.StuId</td>
-                                <td class="border-3">@item.Stuname</td>
-                                <td class="border-3">@item.AvgScore</td>
-                                <td class="border-3">@item.Score15</td>
-                                <td class="border-3">@item.Score60</td>
-                                <td class="border-3">@item.Sub</td>
-                           </tr> 
-                        }
-                    </tbody>
-                </table>
-            </form>
-        }
+        
+        
+      
 
     }
 </div>
+
+@* <div>
+    <form asp-controller="Score" asp-action="Index" method="get">
+        <table>
+            <thead>
+            <thead>
+                <tr>
+                    <th class="border-1"> ID</th>
+                    <th class="border-1">Student Name</th>
+                    <th class="border-1">Average Score</th>
+                    <th class="border-1">Score 15 min</th>
+                    <th class="border-1">Socre 60 min</th>
+                    <th class="border-1">Subject ID</th>
+                </tr>
+            </thead>
+           
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="border-3">@item.StuId</td>
+                        <td class="border-3">@item.Stuname</td>
+                        <td class="border-3">@item.AvgScore</td>
+                        <td class="border-3">@item.Score15</td>
+                        <td class="border-3">@item.Score60</td>
+                        <td class="border-3">@item.Sub</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </form>
+</div> *@

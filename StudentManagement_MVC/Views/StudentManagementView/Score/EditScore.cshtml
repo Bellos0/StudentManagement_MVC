@@ -1,0 +1,48 @@
+﻿@model StudentManagement_MVC.Models.StuddentManagement_database.Score;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers;
+
+
+<div>
+    <h1> Edit Score Page</h1>
+    <form action="SearchScoreStudenContains" method="get">
+        <div>
+            <label for="StuId" class="form-label">Student ID</label>
+            <input asp-for="StuId" type="text" class="form-control" readonly />
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+</div>
+<div>
+    @if (Model != null)
+    {
+        <h1> Result</h1>
+        <form action="ModifiedScore" method="post">
+            <div>
+                <label for="StuId" class="form-label">Student ID</label>
+                <input asp-for="StuId" type="text" class="form-control" readonly />
+            </div>
+            <div>
+                <label for="Stuname" class="form-label">Student Name</label>
+                <input asp-for="Stuname" type="text" class="form-control" readonly />
+            </div>
+            <div>
+                <label for="AvgScore" class="form-label " >Average Score</label>
+                <input asp-for="AvgScore" type="text" class="form-control" readonly />
+            </div>
+            <div>
+                <label for="Score15" class="form-label">Score15</label>
+                <input asp-for="Score15" type="text" class="form-control"  />
+            </div>
+            <div>
+                <label for="Score60" class="form-label">Score60 </label>
+                <input asp-for="Score60" type="text" class="form-control"  />
+            </div>
+            <div>
+                <label for="SubId" class="form-label">Subject ID</label>
+                <input asp-for="SubId" type="text" class="form-control" readonly />
+            </div>
+            <button type="submit" class="btn btn-primary">Update Score</button>
+            <a asp-action="Index" asp-controller="Score" class="btn btn-secondary">Back to List</a>
+        </form>
+    }
+</div>

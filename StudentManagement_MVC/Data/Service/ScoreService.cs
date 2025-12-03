@@ -22,6 +22,7 @@ namespace StudentManagement_MVC.Data.Service
             }
         }
 
+        
 
         public IEnumerable<Score> GetScoresbyContains(string? searchStr)
         {
@@ -31,13 +32,12 @@ namespace StudentManagement_MVC.Data.Service
             {
                 query = query.Where
                     (
-                    s => s.StuId.ToString().Contains(searchStr)
-                    || s.SubId.ToString().Contains(searchStr)
-                    || s.Stuname!.Contains(searchStr)
-                    || s.AvgScore.ToString().Contains(searchStr)
-                    || s.Score15.ToString().Contains(searchStr)
-                    || s.Score60.ToString().Contains(searchStr)
-                    || s.AvgScore.ToString().Contains(searchStr)
+                    s => s.StuId!.ToString().Contains(searchStr)
+                    || s.Stuname!.ToString().Contains(searchStr)
+                    || s.AvgScore!.ToString().Contains(searchStr)
+                    || s.Score15!.ToString().Contains(searchStr)
+                    || s.Score60!.ToString().Contains(searchStr)
+                    || s.AvgScore!.ToString().Contains(searchStr)
                     );
             }
             return query.ToList();
@@ -50,24 +50,35 @@ namespace StudentManagement_MVC.Data.Service
 
         }
 
+        public async Task<Score> GetStuScoreByStuID(string StuID)
+        {
+            //throw new NotImplementedException();
+            var _score = await _context.Scores.FirstOrDefaultAsync(s=> s.StuId==StuID);
+            return _score;
+        }
+
         public async Task ModifyScore(Score score)
         {
             //throw new NotImplementedException();
 
-            var _scoreDB = await _context.Scores.FirstOrDefaultAsync(s => s.Id == score.Id);
+            var _scoreDB = await _context.Scores.FirstOrDefaultAsync(s => s.StuId == score.StuId);
             if (_scoreDB != null)
             {
-                score.Stu = _scoreDB.Stu;
-                score.Stuname = _scoreDB.Stuname;
-                score.AvgScore = _scoreDB.AvgScore;
-                score.Score15 = _scoreDB.Score15;
-                score.Score60 = _scoreDB.Score60;
-                score.Sub = _scoreDB.Sub;
+                //score.Stu = _scoreDB.Stu;
+                //score.Stuname = _scoreDB.Stuname;
+                //_scoreDB.AvgScore = score.AvgScore;
+                _scoreDB.Score15 = score.Score15;
+                _scoreDB.Score60 = score.Score60;
+                //score.Sub = _scoreDB.Sub;
                 await _context.SaveChangesAsync();
             }
 
         }
 
-
+       public async Task<Score?> GetDataByStuID(string stuID)
+        {
+            // throw new NotImplementedException();
+            return await _context.Scores.FirstOrDefaultAsync(s => s.StuId == stuID);
+        }
     }
 }

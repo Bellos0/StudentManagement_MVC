@@ -1,0 +1,45 @@
+﻿@model IEnumerable<StudentManagement_MVC.Models.StuddentManagement_database.Score>; 
+   
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers;
+
+
+<div>
+    <h1>something in here</h1>
+    <form asp-action="ModifiedScore" method="get">
+        <div>   
+            <table>
+                <thead>
+                    <tr>
+                        <th class="border-0">Student ID</th>
+                        <th class="border-0">Student Name</th>
+                        <th class="border-0">Avg Score</th>
+                        <th class="border-0">Score 15</th>
+                        <th class="border-0">Score 60</th>
+                        <th class="border-0">Subject ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        List<StudentManagement_MVC.Models.StuddentManagement_database.Score> scores = Model.ToList();
+                        for (int i = 0; i < scores.Count; i++)
+                        {
+                            <tr>
+                                <td class="border-3"> @scores[i].StuId</td>
+                                <td class="border-3"> @scores[i].Stuname</td>
+                                <td class="border-3"> @scores[i].AvgScore</td>
+                                <td class="border-3"> @scores[i].Score15</td>
+                                <td class="border-3"> @scores[i].Score60</td>
+                                <td class="border-3"> @scores[i].SubId</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </form>
+
+
+
+    
+</div>

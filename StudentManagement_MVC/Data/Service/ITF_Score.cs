@@ -6,7 +6,9 @@ namespace StudentManagement_MVC.Data.Service
     {
         Task AddScore(Score score);
         Task ModifyScore(Score score);
-       Task <IEnumerable<Score>> GetScoresDB();
-       IEnumerable<Score> GetScoresbyContains(string? searchStr);
+        Task<IEnumerable<Score>> GetScoresDB();
+        Task<Score?> GetDataByStuID(string stuID);
+        Task<Score> GetStuScoreByStuID(string StuID);
+        IEnumerable<Score> GetScoresbyContains(string? searchStr);
     }
 }
