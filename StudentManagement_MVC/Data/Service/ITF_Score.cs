@@ -5,8 +5,9 @@ namespace StudentManagement_MVC.Data.Service
     public interface ITF_Score
     {
         Task AddScore(Score score);
-        Task ModifyScore(Score score);
-        Task<IEnumerable<Score>> GetScoresDB();
+        Task<Score?> ModifyScore(Score score);
+        Task<IEnumerable<Score>> GetScoresDB(Score? score);
+        
         Task<Score?> GetDataByStuID(string stuID);
         Task<Score> GetStuScoreByStuID(string StuID);
         IEnumerable<Score> GetScoresbyContains(string? searchStr);

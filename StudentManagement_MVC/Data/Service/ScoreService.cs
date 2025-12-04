@@ -1,6 +1,7 @@
 ﻿using Azure.Core;
 using Microsoft.EntityFrameworkCore;
 using StudentManagement_MVC.Models.StuddentManagement_database;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace StudentManagement_MVC.Data.Service
@@ -22,7 +23,7 @@ namespace StudentManagement_MVC.Data.Service
             }
         }
 
-        
+
 
         public IEnumerable<Score> GetScoresbyContains(string? searchStr)
         {
@@ -53,32 +54,56 @@ namespace StudentManagement_MVC.Data.Service
         public async Task<Score> GetStuScoreByStuID(string StuID)
         {
             //throw new NotImplementedException();
-            var _score = await _context.Scores.FirstOrDefaultAsync(s=> s.StuId==StuID);
+            var _score = await _context.Scores.FirstOrDefaultAsync(s => s.StuId == StuID);
             return _score;
         }
 
-        public async Task ModifyScore(Score score)
+        public async Task<Score?> ModifyScore(Score score)
         {
             //throw new NotImplementedException();
 
             var _scoreDB = await _context.Scores.FirstOrDefaultAsync(s => s.StuId == score.StuId);
             if (_scoreDB != null)
             {
-                //score.Stu = _scoreDB.Stu;
-                //score.Stuname = _scoreDB.Stuname;
-                //_scoreDB.AvgScore = score.AvgScore;
+
                 _scoreDB.Score15 = score.Score15;
                 _scoreDB.Score60 = score.Score60;
-                //score.Sub = _scoreDB.Sub;
+
                 await _context.SaveChangesAsync();
+                await _context.Entry(_scoreDB).ReloadAsync();
+                //var scoreUpdated = await _context.Scores.FirstOrDefaultAsync(s => s.StuId == _scoreDB.StuId);
+                var scoreUpdated = await _context.Scores.FindAsync(_scoreDB.Id);
+                return scoreUpdated;
+            }
+            else
+            {
+                return null;
             }
 
         }
 
-       public async Task<Score?> GetDataByStuID(string stuID)
+        public async Task<Score?> GetDataByStuID(string stuID)
         {
             // throw new NotImplementedException();
             return await _context.Scores.FirstOrDefaultAsync(s => s.StuId == stuID);
         }
+
+        public async Task<IEnumerable<Score>> GetScoresDB(Score? score)
+        {
+            //throw new NotImplementedException();
+            if (score == null)
+            {
+                var scoreDB = await _context.Scores.ToListAsync();
+                return scoreDB;
+            }
+            else
+            {
+                var _scoreDB = await _context.Scores.FirstOrDefaultAsync(s => s.StuId == score.StuId);
+                return _scoreDB != null ? new List<Score> { _scoreDB } : new List<Score>();
+
+            }
+        }
+
+
     }
 }

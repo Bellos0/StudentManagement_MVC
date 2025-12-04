@@ -1,0 +1,32 @@
+﻿@model IEnumerable<StudentManagement_MVC.Models.StuddentManagement_database.Score>;
+
+
+ <div>
+     <h1> something shit here. thank for reading</h1>
+
+     <table>
+         <thead>
+             <tr>
+                 <td class="border-0">Student ID</td>
+                <td class="border-0">Student Name</td>
+                <td class="border-0">Average Score</td>
+                <td class="border-0">Score 15 min</td>
+                <td class="border-0">Score 60 min</td>
+                <td class="border-0">Subject ID</td>
+             </tr>
+         </thead>
+         <tbody>
+             @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="border-2"> @item.StuId</td>
+                    <td class="border-2"> @item.Stuname</td>
+                    <td class="border-2"> @item.AvgScore</td>
+                    <td class="border-2"> @item.Score15</td>
+                    <td class="border-2"> @item.Score60</td>
+                    <td class="border-2"> @item.SubId</td>
+                </tr>
+            }
+         </tbody>
+     </table>
+ </div>
