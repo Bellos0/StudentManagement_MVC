@@ -1,0 +1,56 @@
+﻿@model StudentManagement_MVC.Models.StuddentManagement_database.Score
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers;
+<div>
+    <h2> Add Score Page</h2>
+
+    <div>
+        <form asp-action="GetStubystuID" method="get">
+            <label> Search Student by Student ID</label>
+            <input asp-for="StuId" />
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+    @if (Model != null)
+    {
+
+        <div>
+            <form asp-action="AddScore" method="post">
+                <div>
+                    <label>Student ID</label>
+                    <input asp-for="StuId" class="form-control" readonly />
+                </div>
+
+                <div>
+                    <label>Student Name</label>
+                    <input asp-for="Stuname" class="form-control" readonly />
+                </div>
+
+                <div>
+                    <label>Average Score</label>
+                    <input asp-for="AvgScore" class="form-control" readonly />
+                </div>
+
+                <div>
+                    <label>Score 15 min</label>
+                    <input asp-for="Score15" class="form-control" />
+                </div>
+
+                <div>
+                    <label>Score 60 min</label>
+                    <input asp-for="Score60" class="form-control" />
+                </div>
+
+                <div>
+                    <label>Subject ID</label>
+                    @* <input asp-for="SubId" class="form-control"  /> *@
+                    
+                    <select asp-items="ViewBag.Subjectlist" asp-for="StuId">--Select Subject--</select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Add Score</button>
+
+            </form>
+
+        </div>
+    }
+</div>

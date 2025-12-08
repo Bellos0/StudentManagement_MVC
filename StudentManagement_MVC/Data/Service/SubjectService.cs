@@ -10,7 +10,9 @@ namespace StudentManagement_MVC.Data.Service
         {
             _context = context;
         }
-
+        public SubjectService()
+        {
+        }
 
         public async Task AddSubject(Subject subject)
         {
@@ -52,6 +54,7 @@ namespace StudentManagement_MVC.Data.Service
                 subjectInDb.Subname = subject.Subname;
 
                 await _context.SaveChangesAsync();
+                await _context.Entry(subjectInDb).ReloadAsync();
             }
         }
     }
