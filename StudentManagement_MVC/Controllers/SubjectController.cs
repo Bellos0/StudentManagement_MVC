@@ -12,6 +12,7 @@ namespace StudentManagement_MVC.Controllers
         {
             _subjectService = subjectService;
         }
+        
         public async Task<IActionResult> Index()
         {
             var subjectlist = await _subjectService.GetAllSubject();

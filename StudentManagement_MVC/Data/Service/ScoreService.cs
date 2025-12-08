@@ -47,6 +47,7 @@ namespace StudentManagement_MVC.Data.Service
         public async Task<IEnumerable<Score>> GetScoresDB()
         {
             //throw new NotImplementedException();
+            
             return await _context.Scores.ToListAsync();
 
         }
@@ -105,5 +106,14 @@ namespace StudentManagement_MVC.Data.Service
         }
 
 
+        /// <summary>
+        /// load toan bo subject duoc luu trong co so du lieu
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IEnumerable<Subject>> GetSubjectDB()
+        {
+            //throw new NotImplementedException();
+            return await _context.Subjects.ToListAsync();
+        }
     }
 }
